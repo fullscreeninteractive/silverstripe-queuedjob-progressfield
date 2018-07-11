@@ -1,6 +1,6 @@
 <?php
 
-// namespace FullscreenInteractive\QueuedJobProgressField;
+namespace FullscreenInteractive\QueuedJobProgressField;
 
 use SilverStripe\Forms\FormField;
 use SilverStripe\View\Requirements;
@@ -19,8 +19,6 @@ class QueuedJobProgressField extends FormField
     protected $jobId;
 
     protected $job;
-
-    protected $updateTime = 4;
 
     protected $schemaDataType = FormField::SCHEMA_DATA_TYPE_STRING;
 
@@ -63,8 +61,8 @@ class QueuedJobProgressField extends FormField
     {
         Requirements::javascript('//code.jquery.com/jquery-1.9.1.min.js');
         Requirements::javascript('silverstripe/admin:thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
-        Requirements::javascript('silverstripe-queuedjob-progressfield/client/dist/js/queuedjobprogressfield.js');
-        Requirements::css('silverstripe-queuedjob-progressfield/client/dist/styles/queuedjobprogressfield.css');
+        Requirements::javascript('fullscreeninteractive/silverstripe-queuedjob-progressfield:client/dist/js/queuedjobprogressfield.js');
+        Requirements::css('fullscreeninteractive/silverstripe-queuedjob-progressfield:client/dist/styles/queuedjobprogressfield.css');
 
         return parent::Field($properties);
     }
