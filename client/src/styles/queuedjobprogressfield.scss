@@ -1,0 +1,21 @@
+.queuedjobprogress {
+    .form__field-holder {
+
+    }
+
+    .queuedjob__progress {
+        margin-top: 90px;
+    }
+
+    .form__field-holder {
+        position: relative;
+    }
+
+    .popover {
+        transform: translateY(0) !important;
+    }
+
+    .arrow {
+        display: none;
+    }
+}
