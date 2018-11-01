@@ -25,7 +25,8 @@
     },
     "autoload": {
         "psr-4": {
-            "FullscreenInteractive\\QueuedJobProgressField\\": "src/"
+            "FullscreenInteractive\\QueuedJobProgressField\\": "src/",
+            "FullscreenInteractive\\QueuedJobProgressField\\Tests\\": "tests/"
         }
     },
     "prefer-stable": true,

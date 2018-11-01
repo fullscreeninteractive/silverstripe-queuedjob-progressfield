@@ -1,12 +1,12 @@
-import 'bootstrap';
+// import 'bootstrap';
 
 window.jQuery.entwine('ss', ($) => {
   $('.queuedjob__progress').entwine({
     onmatch() {
       $(this).find('.progress-bar')
         .popover({
-            container: $(this).parents('.form__field-holder'),
-            placement: 'left'
+            container: $(this).parents('.field').get(0),
+            placement: 'top'
         })
         .popover("show")
         .on('hide.bs.popover', function () {
@@ -49,8 +49,8 @@ window.jQuery.entwine('ss', ($) => {
         $.getJSON(link, function(resp) {
             if (resp && resp.Percentage) {
                 var changed = (
-                    $(popover.tip).find('.popover-header').text() !== resp.Title ||
-                    $(popover.tip).find('.popover-body').text() !== resp.Content
+                    $(self).parents('.field').find('.popover-header').text() !== resp.Title ||
+                    $(self).parents('.field').find('.popover-body').text() !== resp.Content
                 )
 
                 progress.css('width', resp.Percentage +'%')
@@ -66,11 +66,21 @@ window.jQuery.entwine('ss', ($) => {
                     progress.addClass('progress-bar-animated')
                 } else {
                     progress.removeClass('progress-bar-animated')
+
+                    // fire a global window event for listeners
+                    $('body').trigger('queuedjob-finished')
                 }
 
                 if (changed) {
-                    $(popover.tip).find('.popover-header').text(resp.Title)
-                    $(popover.tip).find('.popover-body').text(resp.Content)
+                    progress.popover('hide').popover('dispose')
+
+                    $(self).parents('.field').find('.popover-header').text(resp.Title)
+                    $(self).parents('.field').find('.popover-body').text(resp.Content)
+                    $(self).find('.progress-bar')
+                        .attr('title', resp.Title)
+                        .data('title', resp.Title)
+                        .data('content', resp.Content)
+                        .attr('data-content', resp.Content)
 
                     progress.popover('show')
                 }

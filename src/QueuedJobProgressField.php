@@ -16,6 +16,8 @@ class QueuedJobProgressField extends FormField
      */
     private static $progress_timeout = 5000;
 
+    protected $customProgressTimeout;
+
     protected $jobId;
 
     protected $job;
@@ -59,7 +61,6 @@ class QueuedJobProgressField extends FormField
      */
     public function Field($properties = array())
     {
-        Requirements::javascript('//code.jquery.com/jquery-1.9.1.min.js');
         Requirements::javascript('silverstripe/admin:thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
         Requirements::javascript('fullscreeninteractive/silverstripe-queuedjob-progressfield:client/dist/js/queuedjobprogressfield.js');
         Requirements::css('fullscreeninteractive/silverstripe-queuedjob-progressfield:client/dist/styles/queuedjobprogressfield.css');
@@ -80,10 +81,26 @@ class QueuedJobProgressField extends FormField
     }
 
     /**
+     * @param int $time
+     *
+     * @return $this
+     */
+    public function setProgressTimeout($time)
+    {
+        $this->customProgressTimeout = $time;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getCheckInterval()
     {
+        if ($this->customProgressTimeout) {
+            return $this->customProgressTimeout;
+        }
+
         return (int) self::config()->get('progress_timeout');
     }
 
@@ -98,6 +115,7 @@ class QueuedJobProgressField extends FormField
                 'Content' => $this->getPopoverContent(),
                 'Percentage' => $this->getPercentage(),
                 'Status' => $this->getStatus(),
+                'StatusCode' => $this->getJob()->JobStatus,
                 'Animated' => $this->isAnimated()
             ]);
         } else {
@@ -144,14 +162,14 @@ class QueuedJobProgressField extends FormField
         $total = $this->getTotalSteps();
 
         if ($total < 1) {
-            return '1'; // minimum 1% width
+            return '5'; // minimum 5% width
         }
 
         if ($completed > $total) {
             return '100';
         }
 
-        return number_format(max(($completed / $total) * 100, 1), 2);
+        return number_format(max(($completed / $total) * 100, 5), 2);
     }
 
     /**
