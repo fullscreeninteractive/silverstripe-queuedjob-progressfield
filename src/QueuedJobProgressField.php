@@ -177,7 +177,8 @@ class QueuedJobProgressField extends FormField
      */
     public function getPopoverContent()
     {
-        return sprintf('%d of %d steps complete',
+        return sprintf(
+            '%d of %d steps complete',
             $this->getCompletedSteps(),
             $this->getTotalSteps()
         );
