@@ -1,6 +1,6 @@
 # SilverStripe QueuedJob Progress Field
 
-A progress bar and screen for monitoring a [Scheduled Job](https://github.com/symbiote/silverstripe-queuedjobs).
+A progress bar and screen for monitoring a SilverStripe [Scheduled Job](https://github.com/symbiote/silverstripe-queuedjobs).
 
 [![Build Status](https://travis-ci.org/fullscreeninteractive/silverstripe-queuedjob-progressfield.svg?branch=master)](https://travis-ci.org/fullscreeninteractive/silverstripe-queuedjob-progressfield)
 [![Version](http://img.shields.io/packagist/v/fullscreeninteractive/silverstripe-queuedjob-progressfield.svg?style=flat)](https://packagist.org/packages/fullscreeninteractive/silverstripe-queuedjob-progressfield)
@@ -25,6 +25,7 @@ $fields = [
     // ...
     QueuedJobProgressField::create('ScheduledJob', '', $this->ScheduledJobID)
 ];
+```
 
 This module also provides a `Controller` subclass which displays the state of
 the job if needed. Setup a route to point to the `QueuedJobProgressController`
