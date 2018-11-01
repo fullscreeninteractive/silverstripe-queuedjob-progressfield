@@ -7,7 +7,7 @@ use FullscreenInteractive\QueuedJobProgressField\QueuedJobProgressController;
 use Symbiote\QueuedJobs\Jobs\GenerateGoogleSitemapJob;
 use Symbiote\QueuedJobs\Services\QueuedJobService;
 
-class QueuedJobProgressControllerTests extends FunctionalTest
+class QueuedJobProgressControllerTest extends FunctionalTest
 {
     protected function getExtraRoutes()
     {
