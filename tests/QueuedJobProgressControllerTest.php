@@ -9,6 +9,8 @@ use Symbiote\QueuedJobs\Services\QueuedJobService;
 
 class QueuedJobProgressControllerTest extends FunctionalTest
 {
+    protected $usesDatabase = true;
+
     protected function getExtraRoutes()
     {
         return [
