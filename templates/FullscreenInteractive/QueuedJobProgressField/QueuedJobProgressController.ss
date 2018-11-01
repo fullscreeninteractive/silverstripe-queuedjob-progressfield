@@ -116,7 +116,25 @@
                 .removeClass('continue--disabled')
 
             continueSection.find('a').text('Continue');
-            continueSection.find('p').remove();
+            continueSection.find('p').hide();
+
+            // change to a txt.
+            $('.fa-sync')
+                .removeClass('fa-sync fa-spin fa')
+                .addClass('fas fa-check')
+        })
+
+        $('body').on('queuedjob-resumed', function() {
+            var continueSection = $('.continue')
+                .addClass('continue--disabled')
+
+            continueSection.find('a').text('Please wait..');
+            continueSection.find('p').show();
+
+            // change to a txt.
+            $('.fa-check')
+                .removeClass('fas fa-check')
+                .addClass('fa-sync fa-spin fa')
         })
     })
     </script>
