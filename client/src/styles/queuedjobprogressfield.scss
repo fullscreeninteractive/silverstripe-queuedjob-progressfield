@@ -18,4 +18,28 @@
     .arrow {
         display: none;
     }
+
+    .messages {
+        height: 120px;
+        padding: 15px;
+        width: 100%;
+        background: #eee;
+        box-shadow: inset 0 4px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        margin: 10px 0;
+        overflow: scroll;
+
+        ul {
+            margin: 0;
+            padding: 0 0 0 15px;
+        }
+
+        li {
+            font-size: 12px;
+            font-family: monospace;
+            line-height: 15px;
+            color: #333;
+            margin: 0;
+        }
+    }
 }

@@ -115,8 +115,9 @@ class QueuedJobProgressField extends FormField
                 'Content' => $this->getPopoverContent(),
                 'Percentage' => $this->getPercentage(),
                 'Status' => $this->getStatus(),
-                'StatusCode' => $this->getJob()->JobStatus,
-                'Animated' => $this->isAnimated()
+                'StatusCode' => $job->JobStatus,
+                'Animated' => $this->isAnimated(),
+                'Messages' => (is_object($job->getMessages())) ? $job->getMessages()->CDATA() : 'Job Log..'
             ]);
         } else {
             return $this->httpError(400);
@@ -160,6 +161,10 @@ class QueuedJobProgressField extends FormField
     {
         $completed = $this->getCompletedSteps();
         $total = $this->getTotalSteps();
+
+        if ($completed >= $total) {
+            return '100';
+        }
 
         if ($total < 1) {
             return '5'; // minimum 5% width

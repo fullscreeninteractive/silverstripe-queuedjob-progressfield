@@ -72,7 +72,6 @@
 /***/ (function(module, exports) {
 
 
-
 window.jQuery.entwine('ss', function ($) {
     $('.queuedjob__progress').entwine({
         onmatch: function onmatch() {
@@ -137,6 +136,8 @@ window.jQuery.entwine('ss', function ($) {
                         $('body').trigger('queuedjob-finished');
                     }
 
+                    $(self).find('.messages').val(resp.Messages);
+
                     if (changed) {
                         progress.popover('hide').popover('dispose');
 
@@ -144,6 +145,8 @@ window.jQuery.entwine('ss', function ($) {
                         $(self).parents('.field').find('.popover-body').text(resp.Content);
                         $(self).find('.progress-bar').attr('title', resp.Title).data('title', resp.Title).data('content', resp.Content).attr('data-content', resp.Content);
 
+                        progress.popover('show');
+                    } else {
                         progress.popover('show');
                     }
 

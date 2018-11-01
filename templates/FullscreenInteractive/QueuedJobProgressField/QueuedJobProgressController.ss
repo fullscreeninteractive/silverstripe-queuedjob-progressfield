@@ -50,6 +50,10 @@
         opacity: 0.3;
     }
 
+    .fas {
+        margin-top: 2px;
+    }
+
     .progress--meta {
         opacity: 0.7;
         padding-left: 70px;
@@ -103,10 +107,6 @@
         padding: 0 0 0 70px;
         border: none;
     }
-
-    #QueuedJobProgressField {
-        padding: 100px 0 0;
-    }
   </style>
 
   <script>
@@ -148,7 +148,7 @@
       </div>
 
       <div class="progress--meta">
-        <p>Job started by $CurrentJob.RunAs.Name at {$CurrentJob.Created.Nice}</p>
+        <p>Job #$CurrentJob.ID started by $CurrentJob.RunAs.Name at {$CurrentJob.Created.Nice}</p>
       </div>
 
       $ProgressForm

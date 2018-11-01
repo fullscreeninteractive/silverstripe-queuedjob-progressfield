@@ -1,5 +1,4 @@
 // import 'bootstrap';
-
 window.jQuery.entwine('ss', ($) => {
   $('.queuedjob__progress').entwine({
     onmatch() {
@@ -71,6 +70,8 @@ window.jQuery.entwine('ss', ($) => {
                     $('body').trigger('queuedjob-finished')
                 }
 
+                $(self).find('.messages').val(resp.Messages);
+
                 if (changed) {
                     progress.popover('hide').popover('dispose')
 
@@ -83,6 +84,8 @@ window.jQuery.entwine('ss', ($) => {
                         .attr('data-content', resp.Content)
 
                     progress.popover('show')
+                } else {
+                    progress.popover('show');
                 }
 
                 if (resp.Status !== 'bg-success') {
