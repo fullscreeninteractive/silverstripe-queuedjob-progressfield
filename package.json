@@ -21,6 +21,6 @@
     "popper.js": "^1.14.3"
   },
   "engines": {
-    "node": "^9.x"
+    "node": "^8.x"
   }
 }

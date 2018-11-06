@@ -70,7 +70,7 @@ window.jQuery.entwine('ss', ($) => {
                     $('body').trigger('queuedjob-finished')
                 }
 
-                $(self).find('.messages').val(resp.Messages);
+                $(self).parents('.field').find('.messages').html(resp.Messages);
 
                 if (changed) {
                     progress.popover('hide').popover('dispose')
