@@ -1,0 +1,6 @@
+---
+name: queuedjobprogress
+---
+SilverStripe\Core\Injector\Injector:
+  Symbiote\QueuedJobs\Services\QueuedJobService:
+    class: FullscreenInteractive\QueuedJobProgressField\QueuedJobProgressService

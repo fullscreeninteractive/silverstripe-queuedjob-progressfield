@@ -41,3 +41,64 @@ to see the live progress of the job.
 
 ![demo-web](demo-web.png)
 
+## Long Running Single Progress Jobs
+
+Due to the design of queued jobs, the progress indicator (currentStep) is only
+modified in the database at the end of a `process` call. Sometimes with long
+running single process jobs we need to display progress more verbosely.
+`QueuedJobProgressService` is designed as a drop-in replacement for
+`QueuedJobService`. The service allows your job to update the job descriptor
+more frequently.
+
+Example Job
+
+```
+use Symbiote\QueuedJobs\DataObjects\QueuedJobDescriptor;
+use Symbiote\QueuedJobs\Services\AbstractQueuedJob;
+use FullscreenInteractive\QueuedJobProgressField\QueuedJobProgressService;
+use SilverStripe\Core\Injector\Injector;
+
+class MyAwesomeJob extends AbstractQueuedJob
+{
+    protected $descriptor;
+
+    /**
+     * By default the job descriptor is only ever updated when process() is
+     * finished, so for long running single tasks the user see's no process.
+     *
+     * This method manually updates the count values on the QueuedJobDescriptor
+     */
+    public function updateJobDescriptor()
+    {
+        if (!$this->descriptor && $this->jobDescriptorId) {
+            $this->descriptor = QueuedJobDescriptor::get()->byId($this->jobDescriptorId);
+        }
+
+        // rate limit the updater to only 1 query every sec, our front end only
+        // updates every 1s as well.
+        if ($this->descriptor && (!$this->lastUpdatedDescriptor || $this->lastUpdatedDescriptor < (strtotime('-1 SECOND')))) {
+            Injector::inst()->get(QueuedJobProgressService::class)
+                ->copyJobToDescriptor($this, $this->descriptor);
+
+            $this->lastUpdatedDescriptor = time();
+        }
+    }
+
+    public function process()
+    {
+        $tasks = [
+            // ..
+        ];
+
+        foreach ($tasks as $task) {
+            $this->currentStep++;
+
+            // sends feedback to the database in the middle of process() allowing
+            // long single processes to continue.
+            $this->updateJobDescriptor();
+        }
+
+        $this->isComplete = true;
+    }
+}
+```
