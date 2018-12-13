@@ -41,6 +41,28 @@ to see the live progress of the job.
 
 ![demo-web](demo-web.png)
 
+## User Experience Tips
+
+### Overriding Redirection Location
+
+Redirecting users to `site.com/upload/progress/<jobSignature>/<jobId>` displays
+a running status of the job. If the job successes, a *Continue* button for users
+is activated. By default the continue button will redirect the user back, this
+behaviour can be overriden by using a `ContinueLink` query param on the original
+link.
+
+```
+site.com/upload/progress/<jobSignature>/<jobId>?ContinueLink=/thanks/
+```
+
+Likewise, you can set a different link for the button if the job fails, stalls
+or some other error occurs.
+
+```
+site.com/upload/progress/<jobSignature>/<jobId>?FailureLink=/error/
+```
+
+
 ## Long Running Single Progress Jobs
 
 Due to the design of queued jobs, the progress indicator (currentStep) is only

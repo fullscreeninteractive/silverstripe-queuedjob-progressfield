@@ -67,7 +67,9 @@ window.jQuery.entwine('ss', ($) => {
                     progress.removeClass('progress-bar-animated')
 
                     // fire a global window event for listeners
-                    $('body').trigger('queuedjob-finished')
+                    $('body').trigger('queuedjob-finished', [
+                        status: resp.Status
+                    ]);
                 }
 
                 $(self).parents('.field').find('.messages').html(resp.Messages);

@@ -15,7 +15,8 @@ class QueuedJobProgressController extends Controller
     ];
 
     private static $casting = [
-        'ContinueLink' => 'Text'
+        'ContinueLink' => 'HTMLText',
+        'FailureLink' => 'HTMLText'
     ];
 
     private static $url_segment = 'upload';
@@ -33,6 +34,9 @@ class QueuedJobProgressController extends Controller
         ];
     }
 
+    /**
+     * @return \SilverStripe\Forms\Form
+     */
     public function ProgressForm()
     {
         $job = $this->getJob();
@@ -46,9 +50,20 @@ class QueuedJobProgressController extends Controller
         return $form;
     }
 
+    /**
+     * @return string
+     */
     public function ContinueLink()
     {
         return $this->request->getVar('ContinueLink');
+    }
+
+    /**
+     * @return string
+     */
+    public function FailureLink()
+    {
+        return $this->request->getVar('FailureLink');
     }
 
     /**

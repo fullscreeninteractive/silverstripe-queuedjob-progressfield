@@ -83,6 +83,10 @@
             background: #5c940d;
         }
 
+    .continue a.failed {
+        background: #dc3545;
+    }
+
     .continue {
         margin: 70px 0 70px 70px;
     }
@@ -107,24 +111,66 @@
         padding: 0 0 0 70px;
         border: none;
     }
+
+    @media all and (max-width: 480px) {
+        .progress--loader {
+            padding-top: 100px;
+            padding-left: 0;
+        }
+
+        .progress--meta {
+            padding-left: 0;
+        }
+
+        fieldset {
+            padding: 0;
+        }
+
+        .continue {
+            margin-left: 0;
+        }
+    }
   </style>
 
   <script>
     $(document).ready(function() {
-        $('body').on('queuedjob-finished', function() {
+        $('body').on('queuedjob-finished', function(event, data) {
+            var status = (data && typeof data.status !== 'undefined') ? data.status : false;
+
             var continueSection = $('.continue')
-                .removeClass('continue--disabled')
+                .removeClass('continue--disabled');
 
-            continueSection.find('a').text('Continue');
+            var continueLink = continueSection.find('a');
+
+            if (status && status !== 'bg-success') {
+                continueLink.addClass('failed');
+                continueLink.text('Back');
+
+                if (continueLink.data('data-failure-href')) {
+                    continueLink.attr('href', continueLink.data('data-failure-href'))
+                }
+
+                $('.fa-sync')
+                    .removeClass('fa-sync fa-spin fa')
+                    .addClass('fas fa-times')
+            } else {
+                continueLink.removeClass('failed');
+                continueLink.text('Continue');
+
+                if (continueLink.data('data-success-href')) {
+                    continueLink.attr('href', continueLink.data('data-success-href'))
+                }
+
+                // change to a tick.
+                $('.fa-sync')
+                    .removeClass('fa-sync fa-spin fa')
+                    .addClass('fas fa-check')
+            }
+
             continueSection.find('p').hide();
-
-            // change to a txt.
-            $('.fa-sync')
-                .removeClass('fa-sync fa-spin fa')
-                .addClass('fas fa-check')
         })
 
-        $('body').on('queuedjob-resumed', function() {
+        $('body').on('queuedjob-resumed', function(event) {
             var continueSection = $('.continue')
                 .addClass('continue--disabled')
 
@@ -154,7 +200,7 @@
       $ProgressForm
 
       <div class="continue continue--disabled">
-        <a href="$ContinueLink">Please wait..</a>
+        <a href="javascript:history.back()" data-success-href="$ContinueLink" data-failure-href="$FailureLink">Please wait..</a>
 
         <p><small>Servers are working hard on your request. May we suggest a ☕?</small></p>
       </div>

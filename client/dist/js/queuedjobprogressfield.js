@@ -132,7 +132,7 @@ window.jQuery.entwine('ss', function ($) {
                     } else {
                         progress.removeClass('progress-bar-animated');
 
-                        $('body').trigger('queuedjob-finished');
+                        $('body').trigger('queuedjob-finished', [status]);
                     }
 
                     $(self).parents('.field').find('.messages').html(resp.Messages);
