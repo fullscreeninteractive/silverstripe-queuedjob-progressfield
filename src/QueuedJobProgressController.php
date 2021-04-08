@@ -5,6 +5,7 @@ namespace FullscreenInteractive\QueuedJobProgressField;
 use SilverStripe\Control\Controller;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\View\Requirements;
 use Symbiote\QueuedJobs\DataObjects\QueuedJobDescriptor;
 
 class QueuedJobProgressController extends Controller
@@ -28,6 +29,12 @@ class QueuedJobProgressController extends Controller
         if (!$job) {
             return $this->httpError(404);
         }
+
+        Requirements::javascript('silverstripe/admin:thirdparty/jquery/jquery.js');
+        Requirements::javascript('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js');
+        Requirements::javascript('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js');
+        Requirements::javascript('silverstripe/admin:thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
+        Requirements::javascript('fullscreeninteractive/silverstripe-queuedjob-progressfield:client/src/js/queuedjobprogressfield.js');
 
         return [
             'CurrentJob' => $job

@@ -10,11 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
   <style>
     .container {
@@ -131,59 +127,6 @@
         }
     }
   </style>
-
-  <script>
-    $(document).ready(function() {
-        $('body').on('queuedjob-finished', function(event, data) {
-            var status = (data && typeof data.status !== 'undefined') ? data.status : false;
-
-            var continueSection = $('.continue')
-                .removeClass('continue--disabled');
-
-            var continueLink = continueSection.find('a');
-
-            if (status && status !== 'bg-success') {
-                continueLink.addClass('failed');
-                continueLink.text('Back');
-
-                if (continueLink.data('data-failure-href')) {
-                    continueLink.attr('href', continueLink.data('data-failure-href'))
-                }
-
-                $('.fa-sync')
-                    .removeClass('fa-sync fa-spin fa')
-                    .addClass('fas fa-times')
-            } else {
-                continueLink.removeClass('failed');
-                continueLink.text('Continue');
-
-                if (continueLink.data('data-success-href')) {
-                    continueLink.attr('href', continueLink.data('data-success-href'))
-                }
-
-                // change to a tick.
-                $('.fa-sync')
-                    .removeClass('fa-sync fa-spin fa')
-                    .addClass('fas fa-check')
-            }
-
-            continueSection.find('p').hide();
-        })
-
-        $('body').on('queuedjob-resumed', function(event) {
-            var continueSection = $('.continue')
-                .addClass('continue--disabled')
-
-            continueSection.find('a').text('Please wait..');
-            continueSection.find('p').show();
-
-            // change to a txt.
-            $('.fa-check')
-                .removeClass('fas fa-check')
-                .addClass('fa-sync fa-spin fa')
-        })
-    })
-    </script>
 </head>
 
 <body>

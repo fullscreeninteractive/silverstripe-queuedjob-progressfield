@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <small style="margin-top: 20px; display: block;"><a href="admin/queuedjobs/Symbiote-QueuedJobs-DataObjects-QueuedJobDescriptor/EditForm/field/QueuedJobDescriptor/item/$ID/edit" style="color: #999">View Job Information</a></small>
+        <small style="margin-top: 20px; display: block;"><a href="admin/queuedjobs/Symbiote-QueuedJobs-DataObjects-QueuedJobDescriptor/EditForm/field/QueuedJobDescriptor/item/$ID/edit" style="color: #999">View Job Information in CMS</a></small>
 
         <div class="messages" class="messages">$Job.Messages</div>
     <% else %>

@@ -61,8 +61,7 @@ class QueuedJobProgressField extends FormField
      */
     public function Field($properties = array())
     {
-        Requirements::javascript('silverstripe/admin:thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
-        Requirements::javascript('fullscreeninteractive/silverstripe-queuedjob-progressfield:client/dist/js/queuedjobprogressfield.js');
+        Requirements::javascript('fullscreeninteractive/silverstripe-queuedjob-progressfield:client/src/js/queuedjobprogressfield.js');
         Requirements::css('fullscreeninteractive/silverstripe-queuedjob-progressfield:client/dist/styles/queuedjobprogressfield.css');
 
         return parent::Field($properties);
