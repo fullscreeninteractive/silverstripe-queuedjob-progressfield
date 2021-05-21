@@ -30,7 +30,9 @@ class QueuedJobProgressController extends Controller
             return $this->httpError(404);
         }
 
-        Requirements::javascript('silverstripe/admin:thirdparty/jquery/jquery.js');
+        Requirements::block('silverstripe/admin:thirdparty/jquery/jquery.js');
+        Requirements::javascript('https://code.jquery.com/jquery-1.12.4.min.js');
+        Requirements::javascript('fullscreeninteractive/silverstripe-queuedjob-progressfield:client/src/js/browser.js');
         Requirements::javascript('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js');
         Requirements::javascript('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js');
         Requirements::javascript('silverstripe/admin:thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');

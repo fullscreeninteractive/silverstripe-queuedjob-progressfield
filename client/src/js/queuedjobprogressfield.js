@@ -55,7 +55,6 @@ window.jQuery.entwine("ss", ($) => {
 
     $(".queuedjob__progress").entwine({
         onmatch() {
-            console.log("match");
             $(this)
                 .find(".progress-bar")
                 .popover({
@@ -74,7 +73,7 @@ window.jQuery.entwine("ss", ($) => {
 
             var link = $(this).data("live"),
                 self = $(this);
-            console.log(link);
+
             if (link) {
                 setTimeout(function () {
                     self.fetchData();
