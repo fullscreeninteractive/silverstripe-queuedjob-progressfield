@@ -11,10 +11,10 @@ window.jQuery.entwine("ss", ($) => {
             continueLink.addClass("failed");
             continueLink.text("Back");
 
-            if (continueLink.data("data-failure-href")) {
+            if (continueLink.attr("data-failure-href")) {
                 continueLink.attr(
                     "href",
-                    continueLink.data("data-failure-href")
+                    continueLink.attr("data-failure-href")
                 );
             }
 
@@ -25,10 +25,10 @@ window.jQuery.entwine("ss", ($) => {
             continueLink.removeClass("failed");
             continueLink.text("Continue");
 
-            if (continueLink.data("data-success-href")) {
+            if (continueLink.attr("data-success-href")) {
                 continueLink.attr(
                     "href",
-                    continueLink.data("data-success-href")
+                    continueLink.attr("data-success-href")
                 );
             }
 
