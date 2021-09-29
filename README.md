@@ -31,7 +31,7 @@ This module also provides a `Controller` subclass which displays the state of
 the job if needed. Setup a route to point to the `QueuedJobProgressController`
 
 ```
-Director:
+SilverStripe\Control\Director:
   rules:
     'upload//$Action/$ID': 'FullscreenInteractive\QueuedJobProgressField\QueuedJobProgressController'
 ```
